@@ -1,0 +1,27 @@
+{
+  "name": "small-tools",
+  "version": "1.0.0",
+  "description": "JS实用小工具，常见基础数据操作工具集",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon test/array.js",
+    "dev-object": "nodemon test/object.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiangle/small-tools.git"
+  },
+  "keywords": [
+    "tools"
+  ],
+  "bugs": {
+    "url": "https://github.com/xiangle/small-tools/issues"
+  },
+  "homepage": "https://github.com/xiangle/small-tools#readme"
+}
