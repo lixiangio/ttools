@@ -3,31 +3,31 @@
 let T = require('..')
 
 let data = [
-   // { id: 13, b: "name" },
-   // { id: 11, b: "kk" },
-   // { id: 88, b: "test" },
-   // { id: 13, b: "xxx" },
-   // { id: 23, b: "age" },
-   // { id: 11, b: "name" },
-   // {
-   //    id: 553,
-   //    b: {
-   //       xx: {
-   //          jj: {
-   //             ss: { vv: 888 }
-   //          }
-   //       },
-   //       xxx: {
-   //          jj: {
-   //             ss: {
-   //                vv: 666,
-   //                vvv: 888,
-   //             }
-   //          }
-   //       },
-   //       s: 666
-   //    }
-   // },
+   { id: 13, b: "name" },
+   { id: 11, b: "kk" },
+   { id: 88, b: "test" },
+   { id: 13, b: "xxx" },
+   { id: 23, b: "age" },
+   { id: 11, b: "name" },
+   {
+      id: 553,
+      b: {
+         xx: {
+            jj: {
+               ss: { vv: 888 }
+            }
+         },
+         xxx: {
+            jj: {
+               ss: {
+                  vv: 666,
+                  vvv: 888,
+               }
+            }
+         },
+         s: 666
+      }
+   },
    {
       id: 553,
       b: [
@@ -108,7 +108,8 @@ let data = [
       oo: {
          o1: 485,
          o2: 66
-      }
+      },
+      b: 777
    },
 ]
 
@@ -148,23 +149,23 @@ let data = [
 
 // 链式
 let chain = T(data)
-   .and({
-      'id': 553,
-      'b.*.jj.*.ss.dd.*.ss': 666,
-   })
-   .or({
-      'id': 555,
-      'b.*.jj.*.ss.dd.*.ss': 666,
-   })
-   .in({
-      'id': [553, 2321],
-      'b.*.jj.*.ss.dd.*.ss': [666, 389],
-   })
+   // .and({
+   //    'id': 553,
+   //    'b.*.jj.*.ss.dd.*.ss': 666,
+   // })
+   // .or({
+   //    'id': 555,
+   //    'b.*.jj.*.ss.dd.*.ss': 666,
+   // })
+   // .in({
+   //    'id': [553, 2321],
+   //    'b.*.jj.*.ss.dd.*.ss': [666, 389],
+   // })
    // .set({
    //    'id': 555,
    //    'hxs': 484848,
    // })
-   // .group('id')
+   .group('b')
    // .join({
    //    'data': [],
    //    'path': {
@@ -182,18 +183,4 @@ let chain = T(data)
    // })
    .value()
 
-// console.log(chain)
-
-
-// 独立单项
-let and = T.and(data, {
-   'id': 553,
-   'b.*.jj.*.ss.dd.*.ss': 666,
-})
-
-// console.log(and)
-
-// 独立单项
-let merge = T.merge(["a", "x", "e"], ["a", "c", "e"], ["a", "c", "p"])
-
-console.log(merge)
+console.log(chain)

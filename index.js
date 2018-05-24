@@ -1,8 +1,8 @@
 "use strict"
 
-let arrayMethods = require('./array/')
+let ArrayMethods = require('./array/')
 
-let objectMethods = require('./object/')
+let ObjectMethods = require('./object/')
 
 let { clone, mixin } = require('./common')
 
@@ -14,9 +14,9 @@ let { clone, mixin } = require('./common')
 class array {
    constructor(data = []) {
       this.result = data
-      for (const name in arrayMethods) {
+      for (const name in ArrayMethods) {
          this[name] = function (options) {
-            this.result = arrayMethods[name](this.result, options)
+            this.result = ArrayMethods[name](this.result, options)
             return this
          }
       }
@@ -59,7 +59,7 @@ function Tools(data, options) {
             methods[name](options[name])
          }
       }
-      return methods.data
+      return methods.result
    }
    // 管道模式
    else {
@@ -68,10 +68,11 @@ function Tools(data, options) {
 
 }
 
-Object.assign(Tools, arrayMethods, objectMethods)
-
 Tools.clone = clone
 
 Tools.mixin = mixin
+
+// 将数组和对象的操作方法挂载到Tools函数中，可与直接访问
+Object.assign(Tools, ArrayMethods, ObjectMethods)
 
 module.exports = Tools
