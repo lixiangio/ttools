@@ -1,6 +1,6 @@
 "use strict"
 
-let pipeline = require('..')
+let T = require('..')
 
 let data = [
    // { id: 13, b: "name" },
@@ -112,7 +112,7 @@ let data = [
    },
 ]
 
-// let a = pipeline(data, {
+// let a = T(data, {
 //    and: {
 //       'id': 553,
 //       'b.*.kk.*.ss.dd.*.ss': 666,
@@ -144,7 +144,7 @@ let data = [
 
 // console.log(a)
 
-let b = pipeline(data)
+let b = T(data)
 .and({
    'id': 553,
    'b.*.jj.*.ss.dd.*.ss': 666,

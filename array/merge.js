@@ -8,8 +8,10 @@ module.exports = function (...data) {
    let result = {}
 
    for (let array of data) {
-      for (let item of array) {
-         result[item] = undefined
+      if (array instanceof Array) {
+         for (let item of array) {
+            result[item] = undefined
+         }
       }
    }
 

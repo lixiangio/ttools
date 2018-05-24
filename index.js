@@ -4,8 +4,10 @@ let arrayMethods = require('./array/')
 
 let objectMethods = require('./object/')
 
+let { clone, mixin } = require('./common')
+
 /**
-* array类
+* 数组类
 * @param {Array} data 导入数组
 * @param {options} path 选项参数
 */
@@ -26,7 +28,7 @@ class array {
 
 
 /**
-* object类
+* 对象类
 * @param {Object} data 导入对象
 * @param {options} path 选项参数
 */
@@ -39,7 +41,7 @@ class object {
    }
 }
 
-function tools(data, options) {
+function Tools(data, options) {
 
    let methods
 
@@ -66,6 +68,10 @@ function tools(data, options) {
 
 }
 
-Object.assign(tools, arrayMethods, objectMethods)
+Object.assign(Tools, arrayMethods, objectMethods)
 
-module.exports = tools
+Tools.clone = clone
+
+Tools.mixin = mixin
+
+module.exports = Tools

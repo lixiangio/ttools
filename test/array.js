@@ -1,6 +1,6 @@
 "use strict"
 
-let p = require('..')
+let T = require('..')
 
 let data = [
    // { id: 13, b: "name" },
@@ -112,9 +112,8 @@ let data = [
    },
 ]
 
-
 // 对象表达式
-// let op = p(data, {
+// let op = T(data, {
 //    and: {
 //       'id': 553,
 //       'b.*.kk.*.ss.dd.*.ss': 666,
@@ -148,7 +147,7 @@ let data = [
 
 
 // 链式
-let chain = p(data)
+let chain = T(data)
    .and({
       'id': 553,
       'b.*.jj.*.ss.dd.*.ss': 666,
@@ -187,7 +186,7 @@ let chain = p(data)
 
 
 // 独立单项
-let and = p.and(data, {
+let and = T.and(data, {
    'id': 553,
    'b.*.jj.*.ss.dd.*.ss': 666,
 })
@@ -195,6 +194,6 @@ let and = p.and(data, {
 // console.log(and)
 
 // 独立单项
-let merge = p.merge(["a", "x", "e"], ["a", "c", "e"], ["a", "c", "p"])
+let merge = T.merge(["a", "x", "e"], ["a", "c", "e"], ["a", "c", "p"])
 
 console.log(merge)

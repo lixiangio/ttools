@@ -79,7 +79,62 @@ function pathGetValue(data, pathArray = [], func) {
 }
 
 
+/**
+ * 克隆对象
+ * @param {*} data 数据源
+ */
+function clone(data) {
+   if (data instanceof Object) {
+      if (Array.isArray(data)) {
+         let array = [];
+         for (let item of data) {
+            array.push(clone(item))
+         }
+         return array;
+      } else {
+         let obj = {};
+         for (let key in data) {
+            obj[key] = clone(data[key]);
+         }
+         return obj;
+      }
+   } else {
+      return data
+   }
+}
+
+/**
+ * 递归合并对象
+ * @param {*} container 数据容器 
+ * @param {*} join 需要加入到容器的数据
+ */
+function mixin(container, join) {
+   if (join instanceof Object) {
+      // 属性遍历
+      for (let name in join) {
+         let item_join = join[name]
+         let item_container = container[name]
+         // 子集为对象类型，迭代合并子集
+         if (item_join instanceof Object) {
+            // 仅在A、B均为对象时需要合并
+            if (item_container instanceof Object) {
+               container[name] = mixin(item_container, item_join)
+            } else {
+               container[name] = item_join
+            }
+         }
+         // 非对象类型，直接覆盖
+         else {
+            container[name] = item_join
+         }
+      }
+   }
+   return container
+}
+
 module.exports = {
    pathToArray,
-   pathGetValue
+   pathGetValue,
+   clone,
+   mixin
 }
