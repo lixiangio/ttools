@@ -1,11 +1,11 @@
 {
   "name": "small-tools",
-  "version": "1.0.2",
-  "description": "JS实用小工具，常见基础数据操作工具集",
+  "version": "2.0.0",
+  "description": "JS数据处理实用小工具集",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon test/array.js",
-    "dev-object": "nodemon test/object.js"
+    "test": "ava test/ -w"
   },
   "author": "",
   "license": "ISC",
@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/xiangle/small-tools/issues"
   },
-  "homepage": "https://github.com/xiangle/small-tools#readme"
+  "homepage": "https://github.com/xiangle/small-tools#readme",
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "nodemon": "^1.17.5"
+  }
 }

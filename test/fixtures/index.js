@@ -1,5 +1,6 @@
 "use strict"
 
+import test from 'ava';
 let T = require('..')
 
 let data = [
@@ -144,15 +145,15 @@ let data = [
 
 // console.log(a)
 
-let b = T(data)
-.and({
-   'id': 553,
-   'b.*.jj.*.ss.dd.*.ss': 666,
-})
-.or({
-   'id': 555,
-   'b.*.jj.*.ss.dd.*.ss': 666,
-})
+let result = T(data)
+   .and({
+      'id': 553,
+      'b.*.jj.*.ss.dd.*.ss': 666,
+   })
+   .or({
+      'id': 555,
+      'b.*.jj.*.ss.dd.*.ss': 666,
+   })
 // .in({
 //    'id': [553, 2321],
 //    'b.*.jj.*.ss.dd.*.ss': [666, 389],
@@ -178,4 +179,8 @@ let b = T(data)
 //    'oo.o1': 'DESC'
 // })
 
-console.log(b.data)
+// console.log(result)
+
+test('mixing', t => {
+   t.truthy(result, '结果不符合预期');
+})

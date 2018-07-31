@@ -1,46 +1,17 @@
 "use strict"
 
-let ArrayMethods = require('./array/')
+let staticFunc = require('./lib/static')
 
-let ObjectMethods = require('./object/')
+let array = require('./lib/array/')
 
-let { clone, mixin } = require('./common')
-
-/**
-* 数组类
-* @param {Array} data 导入数组
-* @param {options} path 选项参数
-*/
-class array {
-   constructor(data = []) {
-      this.result = data
-      for (const name in ArrayMethods) {
-         this[name] = function (options) {
-            this.result = ArrayMethods[name](this.result, options)
-            return this
-         }
-      }
-   }
-   value() {
-      return this.result;
-   }
-}
+let object = require('./lib/object/')
 
 
 /**
-* 对象类
-* @param {Object} data 导入对象
-* @param {options} path 选项参数
-*/
-class object {
-   constructor(data = {}) {
-      this.result = data
-   }
-   value() {
-      return this.result;
-   }
-}
-
+ * 入口函数
+ * @param {*} data 待处理数据
+ * @param {*} options 操作选项
+ */
 function Tools(data, options) {
 
    let methods
@@ -49,9 +20,11 @@ function Tools(data, options) {
       methods = new array(data)
    } else if (data instanceof Object) {
       methods = new object(data)
+   } else {
+      throw new Error('参数data必须为Array或Object类型')
    }
 
-   // 对象模式
+   // 选项表达式模式
    if (options) {
       // 遍历选项并执行选项名称对应的方法
       for (let name in options) {
@@ -59,20 +32,23 @@ function Tools(data, options) {
             methods[name](options[name])
          }
       }
-      return methods.result
+      return methods.data
    }
-   // 管道模式
+
+   // 管道流模式
    else {
       return methods
    }
 
 }
 
-Tools.clone = clone
+Object.assign(Tools, staticFunc)
 
-Tools.mixin = mixin
+// 将数组和对象的操作方法挂载到Tools函数上，方便直接访问
+// Object.assign(Tools, array, object)
 
-// 将数组和对象的操作方法挂载到Tools函数中，可与直接访问
-Object.assign(Tools, ArrayMethods, ObjectMethods)
+Tools.array = array
+
+Tools.object = object
 
 module.exports = Tools
