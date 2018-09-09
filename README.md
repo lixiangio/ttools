@@ -27,10 +27,12 @@ path表达式用于快速定义一个或一组数据的路径，允许使用“*
 
 #### T(data).get(path)
 
-通过path表达式取值，支持泛匹配
+* `path` *String* 子集路径
+
+通过path表达式取值。
 
 ```js
-let data = [
+let sample = [
    {
       id: 553,
       b: [{
@@ -41,15 +43,19 @@ let data = [
    },
 ]
 
-let result = T(data).get('b.*.kk.*.ss.dd.*.ss')
+let result = T(sample).get('b.*.kk.*.ss.dd.*.ss')
 ```
 
 #### T(data).set(path, value)
 
+* `path` *String* 子集路径
+
+* `value` * 赋值
+
 通过path表达式赋值，支持泛匹配，如果值不存在时会创建新的key/value
 
 ```js
-let data = [
+let sample = [
    {
       id: 553,
       b: [{
@@ -60,15 +66,17 @@ let data = [
    },
 ]
 
-let result = T(data).set('b.*.kk.*.ss.dd.*.ss', 888)
+let result = T(sample).set('b.*.kk.*.ss.dd.*.ss', 888)
 ```
 
 #### T(data).query(options)
 
+* `options` *Object* 一个或多个key/value查询表达式
+
 通过path表达式取值，支持多条件匹配、值匹配
 
 ```js
-let data = [
+let sample = [
    {
       id: 553,
       b: [{
@@ -79,7 +87,7 @@ let data = [
    },
 ]
 
-let result = T(data).query({
+let result = T(sample).query({
    'id': 666,
    'b.*.kk.*.ss.dd.*.ss': 666,
 })
@@ -95,29 +103,29 @@ let result = T(data).query({
 
 ### 数组类型
 
-
 #### T(data).array({ options })
 
+* `options` *Object* 声明式数据操作选项
+
+#### T(data).array({ and: options })
+
+提取同时满足所有查询条件的数据
+
 ```js
-let data = [
+let sample = [
    { id: 11, b: "name" },
    { id: 553 },
    {
       id: 553,
       b: [{
          kk: [{
-            ss: {
-               dd: [{
-                  ss: 666,
-               }]
-            },
+            ss: 666},
          }],
       }],
    },
 ]
 
-
-let result = T(data).array({
+let result = T(sample).array({
    'and'：{
       'id': 553,
       'b.*.kk.*.ss.dd.*.ss': 666
@@ -125,21 +133,54 @@ let result = T(data).array({
 })
 ```
 
-提取同时满足所有条件的数据
-
 #### T(data).array({ or: options })
 
-提取仅满足一个或多个条件的数据
+提取仅满足一个或多个查询条件的数据
 
 #### T(data).array({ in: options })
 
-in相当于在and基础上提供了多值验证。以数组的方式定义多个匹配值，只要命中其中之一，即表示匹配。
+in相当于在and基础上提供了多个可选值。以数组的方式定义多个匹配值，只要命中其中之一，即表示匹配。
+
+```js
+let sample = [
+   { id: 11, b: "name" },
+   { id: 553 }
+]
+
+let result = T(sample).array({
+   'in'：{
+      'id': [553, 11, 338],
+      'b': ['name']
+   }
+})
+```
 
 #### T(data).array({ group: path })
 
-按照指定的键路径对数据进行分组，路径中不支持*号。
+按照指定的键路径对数据进行分组，路径中不支持通配符。
 
 需要注意的是分组后的数组将被转为对象结构，因此会脱离数组管道流（对于分组而言对象结构更利于后续处理）。
+
+```js
+let sample = [
+   {
+      oo: {
+         o1: 99,
+         o2: 81
+      }
+   },
+   {
+      id: 555,
+      cid: 15,
+      oo: {
+         o1: 34,
+         o2: 56
+      }
+   }
+]
+
+let result = T(sample).array({ "group": 'oo.o1' })
+```
 
 #### T(data).array({ join: { data, options } })
 
