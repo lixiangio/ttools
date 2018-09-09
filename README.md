@@ -1,24 +1,33 @@
-<!-- ### 特性
+### 特性
 
-使用声明式风格，更好的容错。
+* 使用声明式风格，具有更好的容错性
 
-相比lodash接口更为简洁，对于深层次、复杂的数据结构操作更加便捷、直观、高效。
+* 相比lodash，对深层次、复杂的数据结构操作更加便捷、直观、高效
 
-small-tools的API是为高级的应用场景而设计的，倾向于直接处理表层的数据需求，实现更好的简化代码、降低碎片化。small-tools的优点同样也是它的缺点，由于API的封装粒度偏大，因此不适合处理高度细化的问题。 -->
+* 倾向于直接处理表层的数据需求，最大限度简化外部代码、减少碎片化代码
+
+* path支持"*"号泛匹配
 
 
-## Install
+### Install
 
 ```
 npm install small-tools
 ```
 
 
-## 通用类型
+### Path表达式
 
-### T(data).get(path)
+path表达式用于快速定义一个或一组数据的路径，允许使用“*”号作为通配符，匹配同一层级中的所有key。
 
-通过path表达式取值，支持ath泛匹配
+通配符通常用于数组子集的模糊匹配，但也适用于对象结构。
+
+
+### 通用类型
+
+#### T(data).get(path)
+
+通过path表达式取值，支持泛匹配
 
 ```js
 let data = [
@@ -32,13 +41,12 @@ let data = [
    },
 ]
 
-
 let result = T(data).get('b.*.kk.*.ss.dd.*.ss')
 ```
 
-### T(data).set(path, value)
+#### T(data).set(path, value)
 
-通过path表达式赋值，支持ath泛匹配，如果值不存在时会创建新的key/value
+通过path表达式赋值，支持泛匹配，如果值不存在时会创建新的key/value
 
 ```js
 let data = [
@@ -55,9 +63,9 @@ let data = [
 let result = T(data).set('b.*.kk.*.ss.dd.*.ss', 888)
 ```
 
-### T(data).query(options)
+#### T(data).query(options)
 
-通过path表达式取值，支持path泛匹配，支持值匹配，，支持匹配多个条件
+通过path表达式取值，支持多条件匹配、值匹配
 
 ```js
 let data = [
@@ -78,23 +86,17 @@ let result = T(data).query({
 ```
 
 
-### T(data).clone()
+#### T(data).clone()
 
 * data `Object, Array` 数据源
 
-深度克隆一个对象。
+深度克隆一个对象
 
 
-## 数组类型
-
-### path表达式
-
-path路径表达式中允许使用“*”号作为通配符，实现key模糊匹配。即匹配当前位置数组中的多个子项，同时也可以通过指定具体的key来精确匹配某个单项。
-
-*号通常用于数组子集的模糊查询，但也适用于非数组结构的普通对象，实际上我们将数组视为没有固定key的特殊对象。
+### 数组类型
 
 
-### T(data).array({ options })
+#### T(data).array({ options })
 
 ```js
 let data = [
@@ -125,25 +127,25 @@ let result = T(data).array({
 
 提取同时满足所有条件的数据
 
-### T(data).array({ or: options })
+#### T(data).array({ or: options })
 
 提取仅满足一个或多个条件的数据
 
-### T(data).array({ in: options })
+#### T(data).array({ in: options })
 
 in相当于在and基础上提供了多值验证。以数组的方式定义多个匹配值，只要命中其中之一，即表示匹配。
 
-### T(data).array({ group: path })
+#### T(data).array({ group: path })
 
 按照指定的键路径对数据进行分组，路径中不支持*号。
 
 需要注意的是分组后的数组将被转为对象结构，因此会脱离数组管道流（对于分组而言对象结构更利于后续处理）。
 
-### T(data).array({ join: { data, options } })
+#### T(data).array({ join: { data, options } })
 
 用于按条件合并两个数组，类似SQL语言中的join水平拼接，将两个数组通过公共键合并为一个数组。
 
-### T(data).array({ inline: { data, relation, set } })
+#### T(data).array({ inline: { data, relation, set } })
 
 内联合并两个数组，通过公共键（主键和外键）将一个数组嵌入到另一个数组中。
 
@@ -180,11 +182,11 @@ let result = T(master).array({
 })
 ```
 
-### T(data).array({ sort: options })
+#### T(data).array({ sort: options })
 
 数组排序，支持多列排序和嵌套数组排序。多层嵌套数组排序不会改变父级顺序，只是对多个嵌套数组本身的排序
 
-### T(data).array({ limit: count })
+#### T(data).array({ limit: count })
 
 限制返回处理结果数量
 
@@ -212,7 +214,7 @@ let result = T(data).array({
 })
 ```
 
-### 数组示例
+#### 示例
 
 ```js
 let data = [
@@ -299,9 +301,9 @@ let result = T(data).array({
 })
 ```
 
-## 对象类型
+### 对象类型
 
-### T(data).object({ mixin: data })
+#### T(data).object({ mixin: data })
 
 * data `*` 需要加入到容器的数据，允许任意数据类型
 
