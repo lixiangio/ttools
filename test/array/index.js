@@ -1,11 +1,11 @@
 "use strict"
 
-import test from 'ava';
-let T = require('../..')
+const test = require('jtf')
+const T = require('../..')
 
-test.skip(t => {
+test.skip('index', t => {
 
-   let data = [
+   let sample = [
       { id: 13, b: "name" },
       { id: 11, b: "kk" },
       { id: 88, b: "test" },
@@ -116,66 +116,26 @@ test.skip(t => {
       },
    ]
 
-   // 对象表达式
-   // let op = T(data, {
-   //    and: {
-   //       'id': 553,
-   //       'b.*.kk.*.ss.dd.*.ss': 666,
-   //    },
-   //    or: {
-   //       'id': 553,
-   //       'b.*.kk.*.ss.dd.*.ss': 666,
-   //    },
-   //    in: {
-   //       'id': [553, 8881],
-   //       'b.*.kk.*.ss.dd.*.ss': [666, 2323],
-   //    },
-   //    join: {
-   //       'data': [],
-   //       'path': {
-   //          'b.*.kk.*.ss.dd.*.ss': 'k.*.kk.*.ss.dd.*.ss',
-   //       },
-   //    },
-   //    set: {
-   //       'jid': 8888,
-   //       'hxs': 484848,
-   //    },
-   //    sort: {
-   //       'a.b.*.s': 'DESC',
-   //       'a.x.*.s': 'DESC'
-   //    },
-   //    limit: 12,
-   // })
-
-   // console.log(op)
-
-
-   // 链式
-   let chain = T(data)
-      // .and({
-      //    'id': 553,
-      //    'b.*.jj.*.ss.dd.*.ss': 666,
-      // })
-      // .or({
-      //    'id': 555,
-      //    'b.*.jj.*.ss.dd.*.ss': 666,
-      // })
-      // .in({
-      //    'id': [553, 2321],
-      //    'b.*.jj.*.ss.dd.*.ss': [666, 389],
-      // })
-      // .set({
-      //    'id': 555,
-      //    'hxs': 484848,
-      // })
-      .group('b')
-      // .join({
+   let result = T(sample).array({
+      and: {
+         'id': 553,
+         'b.*.jj.*.ss.dd.*.ss': 666,
+      },
+      or: {
+         'id': 555,
+         'b.*.jj.*.ss.dd.*.ss': 666,
+      },
+      in: {
+         'id': [553, 2321],
+         'b.*.jj.*.ss.dd.*.ss': [666, 389],
+      },
+      // join: {
       //    'data': [],
       //    'path': {
       //       'b.*.kk.*.ss.dd.*.ss': 'k.*.kk.*.ss.dd.*.ss',
       //    }
-      // })
-      // .sort({
+      // },
+      // sort: {
       //    'id': 'DESC',
       //    'cid': 'DESC',
       //    // 'b.*.xx': 'ASE',
@@ -183,9 +143,10 @@ test.skip(t => {
       //    // 'd.*.uu.*.jj.dd.*.ll': 'ASE',
       //    // 'b.*.ss': 'ASE',
       //    'oo.o1': 'DESC'
-      // })
-      .value()
+      // },
+      // group: "b"
+   })
 
-   console.log(chain)
+   console.log(result)
 
 })

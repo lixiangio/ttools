@@ -1,6 +1,5 @@
-import test from 'ava';
-let T = require('..')
-
+const test = require('jtf')
+const T = require('..')
 
 test('clone', t => {
 
@@ -88,11 +87,11 @@ test('clone', t => {
          }
       },
    ]
-   
-   let result = T.clone(data)
 
-   t.truthy(result);
-   
+   let result = T(data).clone()
+
+   t.deepEqual(data, result);
+
 })
 
 // console.log(result[0].b[0].kk[0].oo.dd[0].ss)

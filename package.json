@@ -1,11 +1,11 @@
 {
   "name": "small-tools",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "JS数据处理实用小工具集",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon test/array.js",
-    "test": "ava test/ -w"
+    "test": "jtf -w"
   },
   "author": "",
   "license": "ISC",
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/xiangle/small-tools#readme",
   "devDependencies": {
-    "ava": "^0.25.0",
-    "nodemon": "^1.17.5"
+    "jtf": "^1.5.1",
+    "typea": "^4.2.0"
   }
 }

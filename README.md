@@ -6,70 +6,9 @@ npm install small-tools
 
 ### 特性
 
-支持函数链、对象声明、静态调用三种使用方式，采用jquery api风格。
-
 相比lodash接口更为简洁，对于深层次、复杂的数据结构操作更加便捷、直观、高效。
 
 small-tools的API是为高级的应用场景而设计的，倾向于直接处理表层的数据需求，实现更好的简化代码、降低碎片化。small-tools的优点同样也是它的缺点，由于API的封装粒度偏大，因此不适合处理高度细化的问题。
-
-
-
-#### 函数链
-
-函数链模式下，数据以管道流的方式依次传递，一个函数执行完毕后，会将结果转给下一个处理函数。
-
-所有函数均采用单入口传参设计，当需要传递多个参数时使用对象或数组来代替。这样做的目的是为了让多参数传参的可读性更好，同时保持与对象声明式的完全兼容。
-
-<!-- 函数链中可以使用所有的静态方法，与使用静态方法的唯一区别是函数链中不再需要传入data，只需要在实例化时传入一次即可。
-
-函数链需要为每个链条创建实例，相比静态方法会产生额外的实例开销。 -->
-
-```js
-let T = require('small-tools')
-
-let data = [...]
-
-let result = T(data).and(options).or(options).value()
-
-// 或
-let { result } = T(data).and(options).or(options)
-```
-
-
-#### 对象声明式
-
-对象声明式支持所有函数链方法，使用对象表达式来描述函数链。
-
-另外，对象声明式会直接导出结果，不再需要用value()取值。
-
-```js
-let T = require('small-tools')
-
-let data = [...]
-
-let result = T(data, {
-   and: options,
-   or: options
-})
-```
-
-
-
-#### 静态方法
-
-很多时候我们并不需要使用函数链，可以直接使用类型静态函数返回结果，这种方式资源开销更低。
-
-```js
-let T = require('small-tools')
-
-let data = [...]
-
-let and = T.and(data, options)
-
-let or = T.or(and, options)
-
-let result = T.limit(or, 10)
-```
 
 
 ## 数组类型

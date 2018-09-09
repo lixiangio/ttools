@@ -1,7 +1,10 @@
-const test = require('jtf')
-const T = require('..')
+"use strict"
 
-let data = [
+const test = require('jtf')
+const typea = require('typea')
+const T = require('../..')
+
+let sample = [
    {
       id: 553,
       b: [
@@ -30,11 +33,29 @@ let data = [
             ],
             xx: 666,
             ss: 888
-         }
+         },
+         {
+            jj: [
+               {
+                  ss: {
+                     dd: [
+                        {
+                           ss: 666,
+                        },
+                        {
+                           oo: 888,
+                        }
+                     ]
+                  },
+               }
+            ],
+            ss: 666,
+            xx: 88,
+         },
       ],
    },
    {
-      id: 555,
+      id: 87,
       cid: 3,
       b: [{
          kk: [{
@@ -57,23 +78,39 @@ let data = [
          o1: 34,
          o2: 56
       }
-   }
+   },
+   {
+      id: 368,
+      cid: 666,
+      oo: {
+         o1: 485,
+         o2: 66
+      }
+   },
 ]
 
 
-test.skip('set', t => {
+test('includes', t => {
 
-   let result = T(data).set('0.b.0.kk.0.oo', 888)
+   let result = T(sample).array({
+      "in": {
+         "id": [553, 368]
+      }
+   })
 
-   console.log(result)
+   let { data, error } = typea(result, [
+      {
+         id: 553,
+         b: [Object, Object]
+      },
+      {
+         id: 368, cid: 666,
+         oo: { o1: 485, o2: 66 }
+      }
+   ])
 
-   // console.log(result[0].b[0].kk[0].oo)
+   // console.log(data)
 
-   // t.deepEqual({ dd: [{ ss: 666 }] }, result)
-
-})
-
-
-test.skip('set * 模糊查询', t => {
+   t.ok(data, error)
 
 })

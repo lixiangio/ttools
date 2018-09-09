@@ -1,11 +1,12 @@
 "use strict"
 
-import test from 'ava';
-let T = require('../..')
+const test = require('jtf')
+const typea = require('typea')
+const T = require('../../')
 
-test.skip(t => {
+test('group', t => {
 
-   let data = [
+   let sample = [
       { id: 13, b: "name" },
       { id: 11, b: "kk" },
       { id: 88, b: "test" },
@@ -114,19 +115,27 @@ test.skip(t => {
          },
          b: 777
       },
+      {
+         id: 323,
+         cid: 88787,
+         oo: {
+            o1: 485,
+            o2: 66
+         }
+      },
    ]
 
-   // 对象表达式
-   let op = T(data, { group: "id", })
+   let result = T(sample).array({ "group": 'oo.o1' })
 
-   console.log(op)
+   let { data, error } = typea(result, {
+      '34': [{ id: 555, cid: 15, oo: Object }],
+      '99': [{ id: 555, cid: 3, b: Array, oo: Object }],
+      '485': [
+         { id: 555, cid: 666, oo: Object, b: 777 },
+         { id: 323, cid: 88787, oo: Object }
+      ]
+   })
 
-
-   // 链式
-   let chain = T(data)
-      .group('id')
-      .value()
-
-   console.log(chain)
+   t.ok(data, error)
 
 })

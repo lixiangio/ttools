@@ -1,9 +1,10 @@
 "use strict"
 
-import test from 'ava';
-import T from '../..';
+const test = require('jtf')
+const T = require('../..')
 
-test('string', t => {
+
+test('set string', t => {
 
    let master = [
       { id: 1, username: 'xinxin' },
@@ -19,13 +20,13 @@ test('string', t => {
       { id: 6, mid: 2, product: 34343 }
    ]
 
-   let result = T(master).inline({
-      data: subset,
-      relation: { 'id': 'mid' },
-      set: "xx"
-   }).value()
-
-   // console.log(result[0])
+   let result = T(master).array({
+      "inline": {
+         data: subset,
+         relation: { 'id': 'mid' },
+         set: "xx"
+      }
+   })
 
    t.deepEqual({
       id: 1,
@@ -41,7 +42,7 @@ test('string', t => {
 })
 
 
-test('function', t => {
+test('set function', t => {
 
    let master = [
       { id: 1, username: 'xinxin' },
@@ -57,56 +58,24 @@ test('function', t => {
       { id: 6, mid: 2, product: 34343 }
    ]
 
-   let result = T(master).inline({
-      data: subset,
-      relation: { 'id': 'mid' },
-      set(parent, subset) {
-         parent.sss = subset
-         return parent
-      }
-   }).value()
-
-   t.deepEqual({
-      id: 1,
-      username: 'xinxin',
-      sss: [
-         { id: 1, mid: 1, product: 12 },
-         { id: 2, mid: 1, product: 34 },
-         { id: 4, mid: 1, product: 232 },
-         { id: 5, mid: 1, product: 988 }
-      ]
-   }, result[0]);
-
-})
-
-
-test('声明式', t => {
-
-   let master = [
-      { id: 1, username: 'xinxin' },
-      { id: 2, username: '小明' }
-   ]
-
-   let subset = [
-      { id: 1, mid: 1, product: 12 },
-      { id: 2, mid: 1, product: 34 },
-      { id: 3, mid: 2, product: 56 },
-      { id: 4, mid: 1, product: 232 },
-      { id: 5, mid: 1, product: 988 },
-      { id: 6, mid: 2, product: 34343 }
-   ]
-
-   let result = T(master, {
+   let result = T(master).array({
       inline: {
          data: subset,
          relation: { 'id': 'mid' },
-         set(parent, subset) {
-            parent.sss = subset
+         set(parent, data) {
+            parent.sub = data
             return parent
          }
       }
    })
 
-   t.truthy(result[0]);
+   t.deepEqual({
+      id: 2,
+      username: '小明',
+      sub: [
+         { id: 3, mid: 2, product: 56 },
+         { id: 6, mid: 2, product: 34343 }
+      ]
+   }, result[1])
 
 })

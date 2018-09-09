@@ -81,7 +81,14 @@ let sample = [
    },
    {
       id: 368,
-      cid: 666,
+      cid: 15,
+      oo: {
+         o1: 485,
+         o2: 66
+      }
+   },
+   {
+      id: 998,
       oo: {
          o1: 485,
          o2: 66
@@ -90,33 +97,22 @@ let sample = [
 ]
 
 
-test('精确匹配', t => {
+test('or', t => {
 
    let result = T(sample).array({
-      "and": {
-         "id": 553,
-         'b.0.kk.1.jj': 888,
+      "or": {
+         "cid": 15,
+         "id": 998,
+         // 'b.*.jj.*.ss.dd.*.ss': 666,
       }
    })
 
-   t.deepEqual([sample[0]], result)
-
-})
-
-
-test('模糊匹配', t => {
-
-   let result = T(sample).array({
-      "and": {
-         "id": 553,
-         'b.*.jj.*.ss.dd.*.ss': 666,
-      }
-   })
+   // console.log(result)
 
    let { data, error } = typea(result, [
-      {
-         id: 553, b: [Object, Object]
-      }
+      { id: 555, cid: 15, oo: { o1: 34, o2: 56 } },
+      { id: 368, cid: 15, oo: { o1: 485, o2: 66 } },
+      { id: 998, oo: { o1: 485, o2: 66 } }
    ])
 
    t.ok(data, error)
