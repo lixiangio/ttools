@@ -6,7 +6,7 @@
 
 * 倾向于直接处理表层的数据需求，最大限度简化外部代码、减少碎片化代码
 
-* path支持"*"号通配符泛匹配
+* path支持通配符泛匹配
 
 
 ### Install
@@ -43,7 +43,7 @@ let sample = [
    },
 ]
 
-let result = T(sample).get('b.*.kk.*.ss.dd.*.ss')
+let result = T(sample).get('b.*.kk.*.ss')
 ```
 
 #### T(data).set(path, value)
@@ -66,7 +66,7 @@ let sample = [
    },
 ]
 
-let result = T(sample).set('b.*.kk.*.ss.dd.*.ss', 888)
+let result = T(sample).set('b.*.kk.*.ss', 999)
 ```
 
 #### T(data).query(options)
@@ -103,7 +103,7 @@ let result = T(sample).query({
 
 ### 数组类型
 
-#### T(data).array({ options })
+#### T(data).array(options)
 
 * `options` *Object* 声明式数据操作选项
 
@@ -128,7 +128,7 @@ let sample = [
 let result = T(sample).array({
    'and'：{
       'id': 553,
-      'b.*.kk.*.ss.dd.*.ss': 666
+      'b.*.kk.*.ss': 666
    }
 })
 ```
@@ -250,7 +250,7 @@ let data = [
 let result = T(data).array({
    'destroy': {
       'id': null,
-      'b.*.kk.*.ss.dd.*.ss': 666,
+      'b.*.kk.*.ss': 888,
    }
 })
 ```
@@ -311,25 +311,21 @@ let data = [
 let result = T(data).array({
    and: {
       'id': 553,
-      'b.*.kk.*.ss.dd.*.ss': 666,
+      'b.*.kk.*.ss': 666,
    },
    or: {
       'id': 553,
-      'b.*.kk.*.ss.dd.*.ss': 666,
+      'b.*.kk.*.ss': 666,
    },
    in: {
       'id': [553, 8881],
-      'b.*.kk.*.ss.dd.*.ss': [666, 2323],
+      'b.*.kk.*.ss': [666, 2323],
    },
    join: {
       'data': [],
       'path': {
-         'b.*.kk.*.ss.dd.*.ss': 'k.*.kk.*.ss.dd.*.ss',
+         'b.*.kk.*.ss': 'k.*.kk.*.ss',
       },
-   },
-   set: {
-      'jid': 8888,
-      'hxs': 484848,
    },
    sort: {
       'id': 'DESC',
