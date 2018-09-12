@@ -1,9 +1,11 @@
 const test = require('jtf')
+const typea = require('typea')
 const T = require('..')
+let toString = Object.prototype.toString
 
 test('clone', t => {
 
-   let data = [
+   let sample = [
       {
          id: 553,
          b: [
@@ -69,29 +71,38 @@ test('clone', t => {
             o1: 99,
             o2: 81
          }
-      },
-      {
-         id: 555,
-         cid: 15,
-         oo: {
-            o1: 34,
-            o2: 56
-         }
-      },
-      {
-         id: 555,
-         cid: 666,
-         oo: {
-            o1: 485,
-            o2: 66
-         }
-      },
+      }
    ]
 
-   let result = T(data).clone()
+   let result = T(sample).clone()
 
-   t.deepEqual(data, result);
+   let { data, error } = typea.strict(result, sample)
+
+   t.ok(data, error)
 
 })
 
-// console.log(result[0].b[0].kk[0].oo.dd[0].ss)
+
+test('new class', t => {
+
+   class O {
+      x() {
+
+      }
+      y() {
+
+      }
+   }
+
+   let sample = new O()
+
+   let result = T(sample).clone()
+
+   let { data, error } = typea.strict(result, {
+      x: Function,
+      y: Function
+   })
+
+   t.ok(data, error)
+
+})

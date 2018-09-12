@@ -1,6 +1,6 @@
 {
   "name": "small-tools",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "JS数据处理实用小工具集",
   "main": "index.js",
   "scripts": {
