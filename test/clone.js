@@ -1,7 +1,7 @@
 const test = require('jtf')
 const typea = require('typea')
 const T = require('..')
-let toString = Object.prototype.toString
+const toString = Object.prototype.toString
 
 test('clone', t => {
 

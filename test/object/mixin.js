@@ -23,7 +23,8 @@ test('mixin', t => {
       xx: 555,
       ss: {
          t: 0
-      }
+      },
+      mm: 222
    }
 
    let result = T(data).object({ mixin })
@@ -32,7 +33,8 @@ test('mixin', t => {
       kk: [{ oo: 122 }],
       xx: 555,
       ss: { jj: 888, t: 0 },
-      oo: { o1: 34, o2: 56 }
+      oo: { o1: 34, o2: 56 },
+      mm: 222
    }, result)
 
 })
