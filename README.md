@@ -27,6 +27,8 @@ path表达式用于快速定义一个或一组数据的路径，允许使用“*
 
 #### T(data).get(path)
 
+* `data` * 数据源，接受任意数据类型
+
 * `path` *String* 子集路径
 
 通过path表达式取值。
@@ -95,8 +97,6 @@ let result = T(sample).query({
 
 
 #### T(data).clone()
-
-* data `Object, Array` 数据源
 
 深度克隆一个对象
 
@@ -340,9 +340,9 @@ let result = T(data).array({
 
 ### 对象类型
 
-#### T(data).object({ mixin: data })
+#### T(data).object({ mixin })
 
-* data `*` 需要加入到容器的数据，允许任意数据类型
+* `mixin` *Object* 混入数据
 
 深度合并两个对象。对于内嵌数组类型是一个例外，因为数组key的动态特性，强制合并通常会产生无意义混乱的结果。目前的解决方案是遇到数组时按优先级覆盖整个数组。
 
@@ -365,3 +365,27 @@ let mixin = {
 
 let result = T(data).object({ mixin })
 ```
+
+
+#### T(data).object({ forEach })
+
+* `forEach` `Function` 数据遍历函数
+
+遍历对象，不改数据源。
+
+```js
+let data = {
+   kk: [],
+   oo: {
+      o1: 8976,
+      o2: 676878
+   }
+}
+
+let result = T(data).object({ 
+   forEach(name, value){
+
+   }
+})
+```
+

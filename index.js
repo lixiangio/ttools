@@ -1,16 +1,16 @@
 "use strict"
 
-let object = require('./lib/object/')
+const object = require('./lib/object/')
 
-let array = require('./lib/array/')
+const array = require('./lib/array/')
 
-let get = require('./lib/get')
+const get = require('./lib/get')
 
-let set = require('./lib/set')
+const set = require('./lib/set')
 
-let query = require('./lib/query')
+const query = require('./lib/query')
 
-let clone = require('./lib/clone')
+const clone = require('./lib/clone')
 
 /**
  * 入口函数
