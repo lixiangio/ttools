@@ -1,6 +1,6 @@
 {
   "name": "small-tools",
-  "version": "3.0.4",
+  "version": "3.0.5",
   "description": "JS数据处理实用小工具集合",
   "main": "index.js",
   "scripts": {
@@ -9,14 +9,16 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "publish": "^0.6.0"
+  },
   "directories": {
     "test": "test"
   },
   "files": [
     "index.js",
     "lib"
- ],
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/xiangle/small-tools.git"
