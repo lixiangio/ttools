@@ -71,7 +71,7 @@ let mixin = {
 
 test.skip('mixin', t => {
 
-   let result = T(data).mixin(mixin, {
+   const result = T(data).mixin(mixin, {
       oo: {
          o3: true,
          o4: true

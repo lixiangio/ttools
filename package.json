@@ -9,9 +9,7 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "publish": "^0.6.0"
-  },
+  "dependencies": {},
   "directories": {
     "test": "test"
   },
