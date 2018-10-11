@@ -12,7 +12,7 @@
 ### Install
 
 ```
-npm install small-tools
+npm install ttools
 ```
 
 

@@ -1,10 +1,9 @@
 {
-  "name": "small-tools",
+  "name": "ttools",
   "version": "3.0.5",
   "description": "JS数据处理实用小工具集合",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon test/array.js",
     "test": "jtf -w"
   },
   "author": "",
@@ -19,15 +18,15 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xiangle/small-tools.git"
+    "url": "git+https://github.com/xiangle/ttools.git"
   },
   "keywords": [
     "tools"
   ],
   "bugs": {
-    "url": "https://github.com/xiangle/small-tools/issues"
+    "url": "https://github.com/xiangle/ttools/issues"
   },
-  "homepage": "https://github.com/xiangle/small-tools#readme",
+  "homepage": "https://github.com/xiangle/ttools#readme",
   "devDependencies": {
     "jtf": "^1.5.1",
     "typea": "^4.2.0"
