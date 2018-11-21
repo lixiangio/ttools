@@ -3,7 +3,7 @@
 const test = require('jtf')
 const T = require('../..')
 
-test('set string', t => {
+test('object', t => {
 
    let master = [
       { id: 1, username: 'xinxin' },
@@ -21,8 +21,8 @@ test('set string', t => {
 
    let result = T(master).array({
       "inline": {
-         data: subset,
-         condition: {
+         from: subset,
+         join: {
             "keyword": { 'id': 'mid' }
          }
       }
@@ -41,7 +41,8 @@ test('set string', t => {
 
 })
 
-test.skip('set function', t => {
+
+test('function', t => {
 
    let master = [
       { id: 1, username: 'xinxin' },
@@ -58,13 +59,10 @@ test.skip('set function', t => {
    ]
 
    let result = T(master).array({
-      inline: {
-         data: subset,
-         relation: { 'id': 'mid' },
-         set(parent, data) {
-            parent.sub = data
-            return parent
-         }
+      inline(set) {
+         set.from(subset).join({
+            "sub": { 'id': 'mid' }
+         })
       }
    })
 
