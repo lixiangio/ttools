@@ -338,6 +338,15 @@ let result = T(data).array({
 })
 ```
 
+### T(data).array({ shuffle: true })
+
+数组乱序
+
+### T(data).array({ getRandom: true })
+
+数组乱序
+
+
 ### 对象类型
 
 #### T(data).object({ mixin })

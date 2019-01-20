@@ -12,6 +12,8 @@ const query = require('./lib/query')
 
 const clone = require('./lib/clone')
 
+const shuffle = require('./lib/shuffle')
+
 /**
  * 入口函数
  * @param {*} data 待处理数据
@@ -25,7 +27,8 @@ function Tools(data) {
       get,
       set,
       query,
-      clone
+      clone,
+      shuffle
    }
 
 }
